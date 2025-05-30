@@ -42,10 +42,11 @@ function loadChat(contact) {
 }
 
 // Attach click listeners to contacts
-contacts.forEach((contact) => {
-  contact.addEventListener("click", () => {
+document.getElementById("contactList").addEventListener("click", function (e) {
+  const contact = e.target.closest(".contact");
+  if (contact) {
     loadChat(contact);
-  });
+  }
 });
 
 // Send message function
@@ -60,14 +61,14 @@ function sendMessage() {
     conversation.scrollTop = conversation.scrollHeight;
     messageText.value = "";
 
-    // Auto-reply after 1.2 seconds
+    // Auto-reply after 1 second
     setTimeout(() => {
       const reply = document.createElement("div");
       reply.className = "message received";
       reply.textContent = "Got your message!";
       conversation.appendChild(reply);
       conversation.scrollTop = conversation.scrollHeight;
-    }, 1200);
+    }, 0);
   }
 }
 
@@ -141,26 +142,27 @@ function createContact() {
 
   const newContact = document.createElement("div");
   newContact.className = "contact";
+  newContact.setAttribute("data-name", name);
+  newContact.setAttribute("data-img", ""); // No image, but keep structure if needed
 
-  const newImage = document.createElement("div");
-  newImage.className = "logo";
+  const logoDiv = document.createElement("div");
+  logoDiv.className = "logo";
 
-  const parts = name.trim().split(/\s+/); // split by spaces
+  // Create initials
+  const parts = name.trim().split(/\s+/);
   let initials = "";
-
   if (parts.length === 1) {
-    initials = parts[0].charAt(0).toUpperCase();
+    initials = parts[0][0].toUpperCase();
   } else {
-    initials =
-      parts[0].charAt(0).toUpperCase() + parts[1].charAt(0).toUpperCase();
+    initials = parts[0][0].toUpperCase() + parts[1][0].toUpperCase();
   }
 
-  newImage.textContent = initials;
+  logoDiv.textContent = initials;
 
   const nameDiv = document.createElement("div");
   nameDiv.textContent = name;
 
-  newContact.appendChild(newImage);
+  newContact.appendChild(logoDiv);
   newContact.appendChild(nameDiv);
 
   const contactList = document.getElementById("contactList");

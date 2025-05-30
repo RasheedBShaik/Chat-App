@@ -50,7 +50,7 @@ footer {
 .magnifier {
   cursor: pointer;
   position: absolute;
-  right: 90px;
+  right: 65px;
 }
 .search::placeholder {
   color: black;
@@ -66,9 +66,9 @@ footer {
 
 /* Layout */
 main {
+  position: relative;
   display: flex;
-  height: calc(100vh - 8.125rem); /* header + footer */
-  margin-top: 16px;
+  height: 100%;
 }
 
 /* Navbar (Contact List) */
@@ -127,7 +127,6 @@ main {
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  /* gap: 0; */
   color: white;
 }
 
@@ -203,16 +202,11 @@ main {
   display: block;
 }
 
-.messageArea {
-  /* background-color: red; */
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
 /* Chat Messages */
 .conversation {
   flex-grow: 1;
-  height: 100%;
-  padding: 16px;
+  height: 70vh;
+  background-color: #fff;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -229,12 +223,16 @@ main {
 .message.sent {
   background-color: #03a9f4;
   color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
   align-self: flex-end;
 }
 
 .message.received {
   background-color: gainsboro;
   color: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
   align-self: flex-start;
 }
 
@@ -246,6 +244,8 @@ main {
   background-color: #f0f0f0;
   border-top: 0.0625rem solid #ccc;
   gap: 16px;
+  position: relative;
+  bottom: 0;
   z-index: 5;
 }
 
@@ -276,7 +276,17 @@ main {
   main {
     flex-direction: column;
   }
-
+  .message-input {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* padding: 10px; */
+    background-color: #fff; /* optional, for better visibility */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* optional shadow */
+    margin: 0;
+    z-index: 1000;
+  }
   .back-btn {
     display: inline-block;
   }
@@ -308,9 +318,15 @@ main {
     height: auto;
     padding: 8px;
   }
-
   .message-input input {
     width: 100%;
+  }
+  .conversation {
+    flex-grow: 1;
+    height: 90%;
+  }
+  body {
+    background-color: #fff;
   }
 }
 .newContact {
