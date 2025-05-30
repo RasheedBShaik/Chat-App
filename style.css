@@ -13,7 +13,6 @@ footer {
   justify-content: space-between;
   align-items: center;
   background-color: #03a9f4;
-  padding: 16px;
   padding-bottom: 0;
   color: white;
 }
@@ -79,6 +78,10 @@ main {
   border-right: 0.0625rem solid #ccc;
   overflow-y: auto;
 }
+
+/* .contactList {
+  height: fit-content;
+} */
 
 /* Contact Item */
 .contact {
