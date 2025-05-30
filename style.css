@@ -228,8 +228,6 @@ main {
 
 /* Message Input */
 .message-input {
-  position: absolute;
-  bottom: 50px; /* above footer */
   width: 100%;
   display: flex;
   padding: 16px;
