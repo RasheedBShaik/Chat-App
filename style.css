@@ -14,7 +14,11 @@ footer {
   align-items: center;
   background-color: #03a9f4;
   padding: 16px;
+  padding-bottom: 0;
   color: white;
+}
+footer {
+  padding-bottom: 16px;
 }
 .search {
   width: 100%;
@@ -217,7 +221,6 @@ main {
 }
 
 .message.received {
-  /* background-color: rgb(188, 131, 240); */
   background-color: gainsboro;
   color: black;
   align-self: flex-start;
@@ -226,7 +229,7 @@ main {
 /* Message Input */
 .message-input {
   position: absolute;
-  bottom: 1.75rem; /* above footer */
+  bottom: 50px; /* above footer */
   width: 100%;
   display: flex;
   padding: 16px;
