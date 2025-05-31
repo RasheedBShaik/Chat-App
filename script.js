@@ -18,7 +18,7 @@ function loadChat(contact) {
 
   contactNameDisplay.textContent = name;
   contactImage.src = imgSrc;
-  contactImage.alt = `${name} Avatar`;
+  contactImage.alt = `${name}`;
 
   // Clear conversation and load dummy messages
   conversation.innerHTML = "";
@@ -39,8 +39,14 @@ function loadChat(contact) {
     navbar.classList.add("hidden");
     chat.classList.add("active");
   }
-}
 
+  if (navbar.classList.contains("active")) {
+    header.style.display = "flex";
+  }
+  if (chat.classList.contains("active")) {
+    header.style.display = "none";
+  }
+}
 // Attach click listeners to contacts
 document.getElementById("contactList").addEventListener("click", function (e) {
   const contact = e.target.closest(".contact");
@@ -87,6 +93,7 @@ messageText.addEventListener("keypress", (e) => {
 backBtn.addEventListener("click", () => {
   navbar.classList.remove("hidden");
   chat.classList.remove("active");
+  header.style.display = "flex";
 });
 
 // Toggle 3-dot menu visibility
@@ -104,6 +111,9 @@ document.addEventListener("click", () => {
 function searchContacts() {
   const input = document.getElementById("searchInput").value.toLowerCase();
   const contacts = document.querySelectorAll("#contactList .contact");
+  const noResult = document.getElementById("noResult");
+
+  let matchFound = false;
 
   contacts.forEach((contact) => {
     const nameDiv = contact.querySelector("div");
@@ -118,21 +128,30 @@ function searchContacts() {
 
       const highlightedName =
         originalName.substring(0, start) +
-        `<span style="color: blue;font-weight:600;">${originalName.substring(
+        `<span style="color:red;font-weight:600;">${originalName.substring(
           start,
           end,
         )}</span>` +
         originalName.substring(end);
 
-      // Save original name to restore later
       nameDiv.setAttribute("data-original", originalName);
       nameDiv.innerHTML = highlightedName;
 
       contact.style.display = "flex";
+      matchFound = true;
     } else {
+      // Restore original name if needed
+      if (nameDiv.hasAttribute("data-original")) {
+        nameDiv.textContent = nameDiv.getAttribute("data-original");
+        nameDiv.removeAttribute("data-original");
+      }
+
       contact.style.display = "none";
     }
   });
+
+  // Show or hide "No contact found"
+  noResult.style.display = matchFound ? "none" : "flex";
 }
 
 // create new contact
@@ -143,9 +162,9 @@ function createContact() {
   const newContact = document.createElement("div");
   newContact.className = "contact";
   newContact.setAttribute("data-name", name);
-  newContact.setAttribute("data-img", ""); // No image, but keep structure if needed
+  newContact.setAttribute("data-img", "./images/Avatar.png"); // No image, but keep structure if needed
 
-  const logoDiv = document.createElement("div");
+  const logoDiv = document.createElement("p");
   logoDiv.className = "logo";
 
   // Create initials
@@ -167,6 +186,4 @@ function createContact() {
 
   const contactList = document.getElementById("contactList");
   contactList.appendChild(newContact);
-
-  console.log("Created contact:", name);
 }
