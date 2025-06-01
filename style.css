@@ -12,21 +12,17 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #03a9f4;
+  background-color: rgb(138, 138, 223);
   padding-bottom: 0;
   color: white;
-}
-header,
-footer {
   padding-top: 16px;
   padding-bottom: 16px;
 }
-
 .search {
   width: 100%;
   height: 40px;
-  color: white;
-  background-color: plum;
+  color: rgb(153, 24, 24);
+  /* background-color:  */
   font-weight: bold;
   border: 2px solid white;
   padding: 0 10px;
@@ -76,15 +72,12 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: -7px;
   max-width: 18.75rem;
-  background-color: #f2f2f2;
+  background-color: #b6ffce;
   border-right: 0.0625rem solid #ccc;
   overflow-y: auto;
 }
-
-/* .contactList {
-  height: fit-content;
-} */
 
 /* Contact Item */
 .contact {
@@ -92,17 +85,29 @@ main {
   align-items: center;
   gap: 16px;
   padding: 16px;
-  border-bottom: 0.0625rem solid #333;
-  background-color: lightblue;
+  border-bottom: 1px solid #333;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 .contact:hover {
-  background-color: rgb(188, 131, 240);
+  background-color: #39ff14;
 }
+
+.contact.sun {
+  /* background-color: #b6ffce; */
+  /* color: black; */
+  /* border-bottom: 1px solid black; */
+}
+
+.contact.moon {
+  background-color: #333;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
 .contact > img {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 
@@ -117,12 +122,9 @@ main {
 .addContact {
   cursor: pointer;
 }
-.addContact:hover {
-  background-color: blue;
-}
 /* Contact Header */
 .contactDetails {
-  background-color: rgb(68, 68, 204);
+  background-color: #eb9b87;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -221,15 +223,15 @@ main {
 }
 
 .message.sent {
-  background-color: #03a9f4;
+  background-color: #209420;
   color: white;
   margin: 10px;
   align-self: flex-end;
 }
 
 .message.received {
-  background-color: gainsboro;
-  color: black;
+  background-color: #333;
+  color: white;
   margin: 10px;
   align-self: flex-start;
 }
@@ -257,7 +259,7 @@ main {
 
 .message-input button {
   padding: 12px 20px;
-  background-color: #03a9f4;
+  background-color: #8a8adf;
   color: white;
   border: none;
   border-radius: 1.25rem;
@@ -266,7 +268,8 @@ main {
 }
 
 .message-input button:hover {
-  background-color: #0288d1;
+  cursor: pointer;
+  /* wwwwwww */
 }
 
 /* Responsive Design */
@@ -347,7 +350,54 @@ main {
 }
 #noResult {
   display: none;
-  color: red;
+  /* color: red; */
   padding-top: 30px;
   justify-content: center;
+}
+.toggle-mode {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sun,
+.moon {
+  border-radius: 50%;
+
+  transition: all 0.3s ease;
+}
+
+.sun:hover,
+.moon:hover {
+  background-color: black;
+}
+.contact.moon,
+.contact.sun {
+  border-radius: 0;
+}
+.contact.moon:hover,
+.contact.sun:hover {
+  background-color: blue;
+}
+
+/* Hide moon by default */
+#mode-toggle ~ .moon {
+  display: none;
+}
+
+/* When checked, hide sun and show moon */
+#mode-toggle:checked ~ .sun {
+  display: none;
+}
+#mode-toggle:checked ~ .navbar {
+  background-color: red;
+}
+
+#mode-toggle:checked ~ .moon {
+  display: block;
+}
+
+#mode-toggle:checked ~ .navbar {
+  background-color: red;
 }
